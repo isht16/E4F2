@@ -1,0 +1,23 @@
+"AddonInfo"
+{
+	addonSteamAppID "550"
+
+	addonTitle       "Enhancements 4 Fixes 2"
+	addonVersion     "0.1.0"
+	addonDescription "An all-in-one modification with enhancements and fixes to Left 4 Dead 2."
+
+	addonAuthor        "Pukt"
+	addonAuthorSteamID "puktpunk"
+
+	addonContent_Campaign       0
+	addonContent_Map            0
+	addonContent_Skin           0
+	addonContent_weapon         0
+	addonContent_BossInfected   0
+	addonContent_CommonInfected 0
+	addonContent_Survivor       0
+	addonContent_Sound          0
+	addonContent_Music          0
+	addonContent_Script         1
+	addonContent_prop           0
+}
