@@ -2,7 +2,7 @@
 {
 	addonSteamAppID "550"
 
-	addonTitle       "Enhancements 4 Fixes 2"
+	addonTitle       "Enhance 4 Fix 2"
 	addonVersion     "0.1.0"
 	addonDescription "An all-in-one modification with enhancements and fixes to Left 4 Dead 2."
 
