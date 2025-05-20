@@ -1,4 +1,4 @@
-![banner](https://github.com/isht16/E4F2/blob/master/assets/banner.png?raw=true)
+![Banner](https://github.com/isht16/E4F2/blob/master/assets/github-banner.png?raw=true)
 
 # Enhance 4 Fix 2 (E4F2)
 
