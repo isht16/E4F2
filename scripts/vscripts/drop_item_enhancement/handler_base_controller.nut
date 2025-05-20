@@ -1,57 +1,34 @@
-local __ENABLED = false;
-
-Enhancement <-
+Event <-
 {
-	function OnGameEvent_entity_shoved(event)
+	Enhancement =
 	{
-		if (!__ENABLED)
+		function OnGameEvent_entity_shoved (event)
 		{
-			return;
+			local player = GetPlayerFromUserID(event.attacker);
+
+			local weapon = player.GetActiveWeapon().GetClassname();
+
+			if (player.GetButtonMask() & (1 << 5))
+			{
+				player.DropItem(weapon);
+			}
 		}
+	}
 
-		local player = GetPlayerFromUserID(event.attacker);
+	function Enabled ()
+	{
+		__CollectEventCallbacks(Enhancement, "OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener);
+	}
 
-		local playerweapon = player.GetActiveWeapon().GetClassname();
+	function Updated ()
+	{
+		// La idea es que se pueda actualizar las config del script sin tener que reiniciar el juego.
+	}
 
-		local flags = player.GetButtonMask();
-
-		if (flags & (1 << 5))
-		{
-			player.DropItem(playerweapon);
-		}
+	function Disabled ()
+	{
+		// No tengo ni puta idea de como eliminar el evento, pero no se puede eliminar el evento de la misma manera que se agrega.
 	}
 }
 
-__CollectEventCallbacks(Enhancement, "OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener);
-
-//
-
-::Event <- {
-
-	function Add () {
-
-		printl("Adding camera movement enhancement script");
-	}
-
-	function Enable () {
-
-		printl("Enabling camera movement enhancement script");
-
-		__ENABLED = true;
-	}
-
-	function Disable () {
-
-		printl("Disabling camera movement enhancement script");
-
-		__ENABLED = false;
-	}
-
-	function Remove () {
-
-		printl("Removing camera movement enhancement script");
-	}
-}
-
-::Handler.AddScript("drop_item_enhancement", ::Event);
-::Handler.EnableScript("drop_item_enhancement");
+ScriptHandler.Mount("drop_item_enhancement", Event);
