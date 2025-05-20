@@ -6,27 +6,50 @@ printl("Loading command_controller.nut...");
 	_itChatTextIndex = {}
 
 	_itChatCount = 0
-
-	_interceptCount = 0
-
-	_interceptList = {}
-	OnInterceptChat = {}
 }
 
-/**
- * Valve forward: Used by EasyLogic to implement chat triggers
- */
+function CommandHandler::AddCommand(id, func)
+{
+	local index = "!" + id;
+
+	_itChatTextIndex[_itChatCount] <- index;
+	_itChatFunction[_itChatCount] <- func;
+
+	_itChatCount++;
+}
+
+function CommandHandler::RemoveCommand(id)
+{
+	local index = "!" + id;
+
+	foreach (i, v in _itChatTextIndex)
+	{
+		if (v == index)
+		{
+			_itChatFunction[i] <- null;
+			_itChatTextIndex[i] <- null;
+
+			break;
+		}
+	}
+}
+
 if (!("InterceptChat" in getroottable()))
 {
+	printl("InterceptChat not found in root table, creating it.");
+
 	::InterceptChat <- function (str, srcEnt)
 	{
 		if (srcEnt != null)
 		{
 			// Strip the name from the chat text
 			local name = srcEnt.GetPlayerName() + ": ";
+
 			local text = strip(str.slice(str.find(name) + name.len()));
 
-			if (startTrigger || hideTrigger)
+			local startTrigger = ( text.find("!") == 0 );
+
+			if (startTrigger)
 			{
 				// Separate the commands and arguments
 				local arr = split(text, " ");
@@ -47,17 +70,12 @@ if (!("InterceptChat" in getroottable()))
 					}
 				}
 
-				foreach (i, id in ::CommandHandler._itChatTextIndex)
+				// Execute the removable trigger (if it is a trigger).
+				foreach (i, trigger in ::CommandHandler._itChatTextIndex)
 				{
-
-				printl(id);
-
-				printl(cmd);
-				printl("---------------------");
-
-					if (id == cmd)
+					if (trigger == cmd || trigger.tolower() == cmd.tolower())
 					{
-						::CommandHandler._itChatFunction[i](srcEnt, args, text);
+						::CommandHandler._itChatFunction[i](args, text);
 
 						break;
 					}
@@ -65,7 +83,7 @@ if (!("InterceptChat" in getroottable()))
 			}
 		}
 
-		if ("ModeInterceptChat" in g_ModeScript)
+		if ("ModeInterceptChat" in g_ModeScript )
 		{
 			if (g_ModeScript.ModeInterceptChat(str, srcEnt) == false)
 			{
@@ -96,54 +114,4 @@ else if (("InterceptChat" in g_MapScript) && (g_MapScript.InterceptChat != getro
 else
 {
 	g_ModeScript.InterceptChat <- getroottable().InterceptChat;
-}
-
-function CommandHandler::AddCommand(id, func)
-{
-	local index = "!" + id;
-
-	_itChatTextIndex[_itChatCount] <- index;
-	_itChatFunction[_itChatCount] <- func;
-
-	_itChatCount++;
-}
-
-function CommandHandler::RemoveCommand(id)
-{
-	local index = "!" + id;
-
-	foreach (i, v in _itChatTextIndex)
-	{
-		if (v == index)
-		{
-			_itChatFunction[i] <- null;
-			_itChatTextIndex[i] <- null;
-
-			break;
-		}
-	}
-}
-
-function CommandHandler::AddInterceptChat(func)
-{
-	foreach (v in _interceptList)
-	{
-		if (v == func)
-			return;
-	}
-
-	_interceptList[_interceptCount] <- func;
-	_interceptCount++;
-}
-
-function CommandHandler::RemoveInterceptChat(func)
-{
-	foreach(i, v in _interceptList)
-	{
-		if (v == func)
-		{
-			_interceptList[i] <- null;
-			break;
-		}
-	}
 }
