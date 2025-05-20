@@ -8,9 +8,10 @@ Mediante un sistema de configuracion, se busca compactar varias caracteristicas 
 
 ## Features
 
-* [ ] Configuration in-game.
-* [ ] Atomic structure.
+* [ ] Allow configuration in-game.
+* [ ] Optimized call structure.
 
 ## Credits
 
 * https://unsplash.com/es/fotos/un-avion-volando-a-traves-de-un-cielo-azul-nublado-2_av6-fu5Ys.
+* https://steamcommunity.com/sharedfiles/filedetails/?id=3480204767.
