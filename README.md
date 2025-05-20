@@ -1,3 +1,5 @@
+![banner](https://github.com/isht16/E4F2/blob/master/assets/banner.png?raw=true)
+
 # Enhance 4 Fix 2 (E4F2)
 
 Se trata de un proyecto para mejorar y corregir errores del juego. A veces, algunos add-ons entran en conflicto con otros, u otros add-ons no estan correctamente desarrollados.
