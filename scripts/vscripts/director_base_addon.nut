@@ -1,12 +1,6 @@
-/************ CONFIGURATION ************/
+IncludeScript("script_listener_handler");
 
-IncludeScript("command_script_handler");
+IncludeScript("player_command_handler");
 
-/************ HANDLER ************/
-
-IncludeScript("script_handler");
-
-/************ LOADER ************/
-
-IncludeScript("drop_item_enhancement/enhancement_base_addon");
-IncludeScript("construction_worker_consistency_fix/fix_base_addon");
+IncludeScript("camera_movement_enhancement/listener");
+IncludeScript("drop_item_enhancement/listener");
