@@ -6,11 +6,6 @@ Se trata de un proyecto para mejorar y corregir errores del juego. A veces, algu
 
 Mediante un sistema de configuracion, se busca compactar varias caracteristicas sin afectar a la experiencia de juego.
 
-## Features
-
-* [ ] Configuration in-game.
-* [ ] Atomic structure.
-
 ## Credits
 
 * https://unsplash.com/es/fotos/un-avion-volando-a-traves-de-un-cielo-azul-nublado-2_av6-fu5Ys.

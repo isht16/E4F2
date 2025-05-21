@@ -1,91 +1,31 @@
-/**
- * CONFIGURATION
- */
-
-// IncludeScript("command_controller");
-
-// function JuanLuis (args, text) {
-
-// 	printl("HELLO WORLDDDDDDDDDDDD");
-// }
-
-// ::CommandHandler.AddCommand("hello", JuanLuis);
-
-/**
- * HANDLER
- */
+// ******************** SCRIPT HANDLER
 
 ::ScriptHandler <-
 {
-	_itScriptEvent = {}
-	_itScriptIndex = {}
+	__listeners = {}
+	__index = {}
 
-	_itScriptCount = 0
+	__count = 0
 
-	function Mount (id, Event)
-	{
-		_itScriptEvent[_itScriptCount] <- Event;
-		_itScriptIndex[_itScriptCount] <- id;
+	function Mount(name, listener, func) {
 
-		_itScriptCount++;
+		local id = name + "_" + listener;
 
-		// Una vez se agrega el comando, debe llamarse una funcion de CommandHandler que registre los comandos.
+		__listeners[__count] <- func;
+		__index[__count] <- id;
+
+		__count++;
 	}
 
-	function Enable (id)
-	{
-		printl("E4F2: Enabled " + id + ".nut script");
+	function Sent(name, listener) {
 
-		foreach (i, v in _itScriptIndex)
+		local id = name + "_" + listener;
+
+		foreach (i, v in __index)
 		{
 			if (v == id)
 			{
-				local Event = _itScriptEvent[i];
-
-				if (Event.Enabled) {
-
-					Event.Enabled();
-				}
-
-				break;
-			}
-		}
-	}
-
-	function Update (id)
-	{
-		printl("E4F2: Updated " + id + ".nut script");
-
-		foreach (i, v in _itScriptIndex)
-		{
-			if (v == id)
-			{
-				local Event = _itScriptEvent[i];
-
-				if (Event.Updated) {
-
-					Event.Updated();
-				}
-
-				break;
-			}
-		}
-	}
-
-	function Disable (id)
-	{
-		printl("E4F2: Disabled " + id + ".nut script");
-
-		foreach (i, v in _itScriptIndex)
-		{
-			if (v == id)
-			{
-				local Event = _itScriptEvent[i];
-
-				if (Event.Disabled) {
-
-					Event.Disabled();
-				}
+				__listeners[i]();
 
 				break;
 			}
@@ -93,10 +33,61 @@
 	}
 }
 
-/**
- * LOADER
- */
+IncludeScript("camera_movement_enhancement/mount");
+IncludeScript("drop_item_enhancement/mount");
 
-IncludeScript("drop_item_enhancement/handler_base_controller");
+// ******************** CONFIGURATION FILE HANDLER
 
-ScriptHandler.Enable("drop_item_enhancement");
+// ******************** SCRIPT COMMAND HANDLER
+
+EventListeners <-
+{
+		function OnGameEvent_player_say (event)
+		{
+			local client = null;
+
+			if ("userid" in event)
+			{
+				client = GetPlayerFromUserID(event["userid"]);
+			}
+
+			if (!client)
+			{
+				return;
+			}
+
+			if ("text" in event)
+			{
+				local arr = {};
+
+				local id = 0;
+
+				foreach (k, v in split(event["text"], " "))
+				{
+					if (v != null && v != "")
+					{
+						arr[id] <- v;
+
+						id++;
+					}
+				}
+
+				if (arr[0] == "!e")
+				{
+					ScriptHandler.Sent(arr[1], "enabled");
+				}
+
+				if (arr[0] == "!u")
+				{
+					ScriptHandler.Sent(arr[1], "updated");
+				}
+
+				if (arr[0] == "!d")
+				{
+					ScriptHandler.Sent(arr[1], "disabled");
+				}
+			}
+		}
+}
+
+__CollectEventCallbacks(EventListeners, "OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener);
