@@ -29,6 +29,6 @@ ScriptHandler.Mount(
 
 	function ()
 	{
-		// __CollectEventCallbacks(EventListeners, "OnGameEvent_", "GameEventCallbacks", UnregisterScriptGameEventListener);
+
 	}
 );

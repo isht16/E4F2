@@ -9,10 +9,6 @@
 
 	function Mount(name, listener, func) {
 
-		/**
-		 * Esto es mucho mas eficiente que almacenar todas las funciones, pero no se.
-		 */
-
 		local id = name + "_" + listener;
 
 		__listeners[__count] <- func;
@@ -44,9 +40,8 @@ IncludeScript("drop_item_enhancement/mount");
 
 // ******************** SCRIPT COMMAND HANDLER
 
-__CollectEventCallbacks(
-
-	{
+EventListeners <-
+{
 		function OnGameEvent_player_say (event)
 		{
 			local client = null;
@@ -93,7 +88,6 @@ __CollectEventCallbacks(
 				}
 			}
 		}
-	},
+}
 
-	"OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener
-);
+__CollectEventCallbacks(EventListeners, "OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener);
