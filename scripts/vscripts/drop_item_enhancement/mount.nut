@@ -1,8 +1,8 @@
-ScriptHandler.Mount(
+__Add(
 
-	"drop_item_enhancement", "enabled",
+	"e__dp_item_enabled",
 
-	function ()
+	function(params)
 	{
 		EventListeners <-
 		{
@@ -23,12 +23,12 @@ ScriptHandler.Mount(
 	}
 );
 
-ScriptHandler.Mount(
+// __Add(
 
-	"drop_item_enhancement", "disabled",
+// 	"e__dp_item_disabled",
 
-	function ()
-	{
+// 	function(params)
+// 	{
 
-	}
-);
+// 	}
+// );

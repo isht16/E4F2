@@ -1,18 +1,18 @@
-ScriptHandler.Mount(
+__Add(
 
-	"camera_movement_enhancement", "enabled",
+	"e__cam_mv_enabled",
 
-	function ()
+	function(params)
 	{
 		Convars.SetValue("sv_rollangle", "2");
 	}
 );
 
-ScriptHandler.Mount(
+__Add(
 
-	"camera_movement_enhancement", "disabled",
+	"e__cam_mv_disabled",
 
-	function ()
+	function(params)
 	{
 		Convars.SetValue("sv_rollangle", "0");
 	}
