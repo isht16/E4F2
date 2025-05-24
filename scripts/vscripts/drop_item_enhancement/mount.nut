@@ -1,34 +1,42 @@
-__Add(
+EventListeners <-
+{
+	__enabled = false;
 
-	"e__dp_item_enabled",
-
-	function(params)
+	function OnCommandEvent_dp_item_e_enabled(e)
 	{
-		EventListeners <-
+		if (__enabled)
 		{
-			function OnGameEvent_entity_shoved(event)
-			{
-				local player = GetPlayerFromUserID(event.attacker);
-
-				local weapon = player.GetActiveWeapon().GetClassname();
-
-				if (player.GetButtonMask() & (1 << 5))
-				{
-					player.DropItem(weapon);
-				}
-			}
+			return;
 		}
 
-		__CollectEventCallbacks(EventListeners, "OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener);
+		printl("enabled drop_item_enhancement.nut script");
+
+		__CollectEventCallbacks(this, "OnGameEvent_", "GameEventCallbacks", ::RegisterScriptGameEventListener);
 	}
-);
 
-// __Add(
+	function OnCommandEvent_dp_item_e_disabled(e)
+	{
+		if (!__enabled)
+		{
+			return;
+		}
 
-// 	"e__dp_item_disabled",
+		printl("disabled drop_item_enhancement.nut script");
 
-// 	function(params)
-// 	{
+		// __CollectEventCallbacks(this, "OnGameEvent_", "GameEventCallbacks", ::RegisterScriptGameEventListener);
+	}
 
-// 	}
-// );
+	function OnGameEvent_entity_shoved(e)
+	{
+		local player = GetPlayerFromUserID(e.attacker);
+
+		local weapon = player.GetActiveWeapon().GetClassname();
+
+		if (player.GetButtonMask() & (1 << 5))
+		{
+			player.DropItem(weapon);
+		}
+	}
+}
+
+__CollectEventCallbacks(EventListeners, "OnCommandEvent_", "CommandEventCallbacks", ::RegisterScriptCommandEventListener);

@@ -16,46 +16,31 @@ EventListeners <-
 
 		if ("text" in event)
 		{
-			local text = split(event["text"], " ");
+			local arr = {};
 
-			if (text.len() < 2)
+			local i = 0;
+
+			foreach (k, v in split(event["text"], " "))
+			{
+				if (v != null && v != "")
+				{
+					arr[i] <- v;
+
+					i++;
+				}
+			}
+
+			if (arr.len() < 2)
 			{
 				return;
 			}
 
-			local command = text[0];
-			local listener = text[1];
-
-			local params = {};
-
-			local id = 0;
-
-			foreach (k, v in text)
+			if ('@' in arr[0])
 			{
-				if (k != 0 && k != 1 && v != null && v != "")
-				{
-					params[id] <- v;
-
-					id++;
-				}
-			}
-
-			if (command == "@")
-			{
-				if (listener == "::")
-				{
-					foreach (k, v in params)
-					{
-						__Sent(v, null);
-					}
-				}
-				else
-				{
-					__Sent(listener, params);
-				}
+				__RunEventCallbacks(arr[1], null, "OnCommandEvent_", "CommandEventCallbacks", true);
 			}
 		}
 	}
 }
 
-__CollectEventCallbacks(EventListeners, "OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener);
+__CollectEventCallbacks(EventListeners, "OnGameEvent_", "GameEventCallbacks", ::RegisterScriptGameEventListener);
