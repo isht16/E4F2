@@ -1,15 +1,15 @@
-::DropItemEnhancementEventListeners <-
+DropItemEnhancement <-
 {
 	__enabled = false
 
-	function OnCommandEvent_dp_item_e_enabled(e)
+	function OnCommandEvent_e__dp_item_enab(e)
 	{
 		__enabled = true;
 
 		__CollectEventCallbacks(this, "OnGameEvent_", "GameEventCallbacks", ::RegisterScriptGameEventListener);
 	}
 
-	function OnCommandEvent_dp_item_e_disabled(e)
+	function OnCommandEvent_e__dp_item_disab(e)
 	{
 		__enabled = false;
 	}
@@ -32,4 +32,4 @@
 	}
 }
 
-__CollectEventCallbacks(::DropItemEnhancementEventListeners, "OnCommandEvent_", "CommandEventCallbacks", null);
+__CollectEventCallbacks(DropItemEnhancement, "OnCommandEvent_", "CommandEventCallbacks", null);

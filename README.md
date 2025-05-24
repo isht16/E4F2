@@ -1,9 +1,11 @@
-![thumbnail](https://github.com/isht16/E4F2/blob/master/.github/thumbnail/2nd.png?raw=true)
+![thumbnail](https://www.github.com/isht16/e4f2/blob/master/.github/thumbnail/2nd.png?raw=true)
 
-# Enhance 4 Fix 2 (E4F2)
+# Enhance 4 Fix 2
 
-Se trata de una extencion desarrollada por mi para aplicar a Left 4 Dead 2, parches con nuevas caracteristicas y soluciones a errores. Se intenta que funcione unicamente en el lado del servidor (**server-side**), aprovechando al maximo la funcionalidad de **utilizar recursos del servidor** que implementa **Source**.
+Una extensión desarrollada para introducir nuevas características y soluciones a errores en [Left 4 Dead 2.](https://store.steampowered.com/app/550)
 
-Aunque, la Steam Workshop ofrece una destacable cantidad de extenciones similares, quisiera aportar una extencion mas especializada.
+Se utiliza solo en el lado del servidor, aprovechando al máximo la funcionalidad de **transferir recursos a los clientes** que ofrece el [motor Source.](https://developer.valvesoftware.com/wiki/Source)
+
+Si necesitas más información, [consulta la documentación aquí.](https://www.github.com/isht16/e4f2/wiki)
 
 ## Credits
