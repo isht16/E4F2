@@ -1,33 +1,26 @@
-EventListeners <-
+::DropItemEnhancementEventListeners <-
 {
-	__enabled = false;
+	__enabled = false
 
 	function OnCommandEvent_dp_item_e_enabled(e)
 	{
-		if (__enabled)
-		{
-			return;
-		}
-
-		printl("enabled drop_item_enhancement.nut script");
+		__enabled = true;
 
 		__CollectEventCallbacks(this, "OnGameEvent_", "GameEventCallbacks", ::RegisterScriptGameEventListener);
 	}
 
 	function OnCommandEvent_dp_item_e_disabled(e)
 	{
+		__enabled = false;
+	}
+
+	function OnGameEvent_entity_shoved(e)
+	{
 		if (!__enabled)
 		{
 			return;
 		}
 
-		printl("disabled drop_item_enhancement.nut script");
-
-		// __CollectEventCallbacks(this, "OnGameEvent_", "GameEventCallbacks", ::RegisterScriptGameEventListener);
-	}
-
-	function OnGameEvent_entity_shoved(e)
-	{
 		local player = GetPlayerFromUserID(e.attacker);
 
 		local weapon = player.GetActiveWeapon().GetClassname();
@@ -39,4 +32,4 @@ EventListeners <-
 	}
 }
 
-__CollectEventCallbacks(EventListeners, "OnCommandEvent_", "CommandEventCallbacks", ::RegisterScriptCommandEventListener);
+__CollectEventCallbacks(::DropItemEnhancementEventListeners, "OnCommandEvent_", "CommandEventCallbacks", null);

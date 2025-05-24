@@ -1,20 +1,5 @@
-::CommandEventCallbacks <-
-{
+IncludeScript("configuration_file_handler");
 
-}
-
-::__idxxx <- 0;
-
-::RegisterScriptCommandEventListener <- function(name) {
-
-	printl(name);
-
-	CommandEventCallbacks[__idxxx] <- name;
-
-	__idxxx++;
-}
+IncludeScript("player_command_handler");
 
 IncludeScript("drop_item_enhancement/mount");
-
-IncludeScript("configuration_file_handler");
-IncludeScript("player_command_handler");
