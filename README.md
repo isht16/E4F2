@@ -1,4 +1,4 @@
-![thumbnail](https://www.github.com/isht16/e4f2/blob/master/.github/thumbnail/2nd.png?raw=true)
+![thumbnail](https://raw.githubusercontent.com/isht16/e4f2/refs/heads/development/.github/thumbnail/2nd.png)
 
 # Enhance 4 Fix 2
 
