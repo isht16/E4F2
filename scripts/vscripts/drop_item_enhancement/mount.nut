@@ -1,34 +1,35 @@
-__Add(
+::DropItemEnhancementEventListeners <-
+{
+	__enabled = false
 
-	"e__dp_item_enabled",
-
-	function(params)
+	function OnCommandEvent_dp_item_e_enabled(e)
 	{
-		EventListeners <-
+		__enabled = true;
+
+		__CollectEventCallbacks(this, "OnGameEvent_", "GameEventCallbacks", ::RegisterScriptGameEventListener);
+	}
+
+	function OnCommandEvent_dp_item_e_disabled(e)
+	{
+		__enabled = false;
+	}
+
+	function OnGameEvent_entity_shoved(e)
+	{
+		if (!__enabled)
 		{
-			function OnGameEvent_entity_shoved(event)
-			{
-				local player = GetPlayerFromUserID(event.attacker);
-
-				local weapon = player.GetActiveWeapon().GetClassname();
-
-				if (player.GetButtonMask() & (1 << 5))
-				{
-					player.DropItem(weapon);
-				}
-			}
+			return;
 		}
 
-		__CollectEventCallbacks(EventListeners, "OnGameEvent_", "GameEventCallbacks", RegisterScriptGameEventListener);
+		local player = GetPlayerFromUserID(e.attacker);
+
+		local weapon = player.GetActiveWeapon().GetClassname();
+
+		if (player.GetButtonMask() & (1 << 5))
+		{
+			player.DropItem(weapon);
+		}
 	}
-);
+}
 
-// __Add(
-
-// 	"e__dp_item_disabled",
-
-// 	function(params)
-// 	{
-
-// 	}
-// );
+__CollectEventCallbacks(::DropItemEnhancementEventListeners, "OnCommandEvent_", "CommandEventCallbacks", null);

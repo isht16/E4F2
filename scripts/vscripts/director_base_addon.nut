@@ -1,6 +1,7 @@
-IncludeScript("script_event_handler");
+IncludeScript("configuration_file_handler");
 
-IncludeScript("camera_movement_enhancement/mount");
-IncludeScript("drop_item_enhancement/mount");
+IncludeScript("splash_screen_handler");
 
 IncludeScript("player_command_handler");
+
+IncludeScript("drop_item_enhancement/mount");
